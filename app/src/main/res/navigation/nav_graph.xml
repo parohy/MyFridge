@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/tableOfContentFragment">
+
+    <fragment
+        android:id="@+id/tableOfContentFragment"
+        android:name="com.parohy.myfridge.ui.toc.TableOfContentFragment"
+        tools:layout="@layout/fragment_toc"
+        android:label="TableOfContentFragment" />
+</navigation>
