@@ -3,6 +3,7 @@ package com.parohy.myfridge.api.repo
 import com.parohy.myfridge.api.model.Food
 import com.parohy.myfridge.api.room.FoodDAO
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
@@ -15,7 +16,7 @@ class FoodDataSource @Inject constructor(private val foodDAO: FoodDAO): Composit
         const val ADD: Int = 0
         const val DEL: Int = 1
     }
-    val foodListSubject: BehaviorSubject<List<Food>> = BehaviorSubject.create()
+    private val foodListSubject: BehaviorSubject<List<Food>> = BehaviorSubject.create()
 
     init {
         foodDAO.getAllFoodObservable()
@@ -23,6 +24,8 @@ class FoodDataSource @Inject constructor(private val foodDAO: FoodDAO): Composit
             .doOnDispose { Timber.d("Get all query disposed") }
             .subscribe(foodListSubject)
     }
+
+    override fun source(): Observable<List<Food>> = foodListSubject
 
     override fun addFoodCompletable(food: Food): Completable = foodDAO.insertFoodCompletable(food)
     override fun addFood(food: Food) {

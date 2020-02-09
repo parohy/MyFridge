@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.parohy.myfridge.api.model.Food
 
-@Database(entities = [Food::class], version = 2, exportSchema = false)
+@Database(entities = [Food::class], version = 3, exportSchema = false)
 @TypeConverters(EnumTypeConverter::class)
 abstract class Database: RoomDatabase() {
     abstract fun foodDAO(): FoodDAO

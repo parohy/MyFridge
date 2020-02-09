@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MyFridge</string>
+
+    <!--  FOOD VIEW  -->
+    <string name="amount">Amount </string>
+    <string name="raw_safety_notice">Consuming raw or undercooked meats, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness.</string>
+    <string name="last_supplied">Last supplied:</string>
 </resources>

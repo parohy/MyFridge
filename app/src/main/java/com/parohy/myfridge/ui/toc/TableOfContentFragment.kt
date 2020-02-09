@@ -7,25 +7,34 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.parohy.myfridge.R
-import timber.log.Timber
+import com.parohy.myfridge.ui.ActionFragment
+import com.parohy.myfridge.ui.ActionInterface
+import kotlinx.android.synthetic.main.fragment_toc.*
 
-class TableOfContentFragment: Fragment() {
+class TableOfContentFragment : Fragment(), ActionFragment {
     private lateinit var viewModel: TableOfContentViewModel
+    private lateinit var listAdapter: FoodListAdapter
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        listAdapter = FoodListAdapter(requireContext())
         viewModel = ViewModelProvider(this).get(TableOfContentViewModel::class.java)
         viewModel.foodList.observe(viewLifecycleOwner, Observer {
-            Timber.d("List: $it")
+            listAdapter.updateList(it)
         })
+        foodList.layoutManager = LinearLayoutManager(requireContext())
+        foodList.adapter = listAdapter
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_toc, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_toc, container, false)
+
+    override fun onAction(actionInterface: ActionInterface) {
+        actionInterface.actionAdd()
     }
 }
